@@ -1,24 +1,26 @@
 <?php
 
 spl_autoload_register(function ($class) {
-    // On définit les répertoires de base du projet
-    $baseDirs = [
-        'Pho3nix\\' => __DIR__ . '/Router/', // Pour notre framework dans /lib/Router
-        'App\\' => dirname(__DIR__) . '/src/' // Pour notre application dans /src
+    // Remplacer les backslashes par des slashes et ajouter .php à la fin
+    $classPath = str_replace('\\', '/', $class) . '.php';
+    
+    // Définir les chemins pour rechercher les classes
+    $paths = [
+        __DIR__ . '/../src/',    // Pour les classes dans /src/
+        __DIR__ . '/../lib/',    // Pour les classes dans /lib/
     ];
 
-    foreach ($baseDirs as $namespace => $baseDir) {
-        if (strpos($class, $namespace) === 0) {
-            // ON convert le namespace en chemin de fichier
-            $relativeClass = str_replace('\\', '/', substr($class, strlen($namespace)));
-            $file = $baseDir . $relativeClass . '.php';
-
-            if (file_exists($file)) {
-                require $file;
-                return;
-            }
+    foreach ($paths as $path) {
+        $file = $path . $classPath;
+        echo "Recherche : " . $file . "<br>";  // Debug
+        if (file_exists($file)) {
+            require_once $file;
+            echo "✅ Chargé : " . $file . "<br>";  // Debug
+            return;
         }
     }
+
+    echo "❌ Fichier introuvable : " . $classPath . "<br>";  // Debug
 });
 
 ?>

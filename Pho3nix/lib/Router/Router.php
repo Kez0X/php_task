@@ -1,6 +1,6 @@
 <?php
 
-namespace Pho3nix\Router;
+namespace Pho3nix\lib\Router;
 require dirname(__DIR__, 2) . '/config/routes.php';
 
 // Documentation : https://laconsole.dev/formations/framework-php/routage
@@ -10,6 +10,7 @@ class Router {
     private string $method;
 
     public function __construct() {
+        echo "Le routeur fonctionne !";
         $this->routes = ROUTES;
         $this->requestedPath = isset($_GET['path']) ? $_GET['path'] : '/';
         $this->method = $_SERVER['REQUEST_METHOD'];

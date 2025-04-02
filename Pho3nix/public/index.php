@@ -12,10 +12,12 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // On importe le routeur de notre framework
-use Pho3nix\Router\Router;
+use Pho3nix\lib\Router\Router;
 
 // Charger l'autoloader
 require dirname(__DIR__) . '/lib/autoload.php';
+
+var_dump(class_exists('Pho3nix\Router\Router'));
 
 try {
     // On instancie et lance le routeur
