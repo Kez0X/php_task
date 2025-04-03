@@ -60,3 +60,13 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 ```
+
+## Pour lancer le site en localhost, une fois la BDD configurée
+
+```bash
+cd Pho3nix
+```
+
+```bash
+php -S localhost:8000 -t public
+```
