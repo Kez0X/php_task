@@ -6,6 +6,14 @@ const ROUTES = [
             'controller' => App\Controller\MainController::class,
             'method' => 'home'
         ],
+        '/signup' => [
+            'controller' => App\Controller\MainController::class,
+            'method' => 'signup'
+        ],
+        '/logout' => [
+            'controller' => App\Controller\UserController::class,
+            'method' => 'signout'
+        ]
     ],
     'POST' => [
         '/task/new' => [
@@ -31,11 +39,7 @@ const ROUTES = [
         '/signup' => [
             'controller' => App\Controller\UserController::class,
             'method' => 'signup'
-        ],
-        '/logout' => [
-            'controller' => App\Controller\UserController::class,
-            'method' => 'signout'
-        ],
+        ]
     ]
 ];
 
