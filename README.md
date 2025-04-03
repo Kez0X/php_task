@@ -1,6 +1,6 @@
 # php_task
 
-Ce site sera un gestionnaire de tache en ligne avec un sytème de connexion et des tâches qu'on peut ajouter et enlver comme bon nous semble.
+Ce site sera un gestionnaire de tache en ligne avec un sytème de connexion et des tâches qu'on peut ajouter et enlever comme bon nous semble.
 
 ## Instructions SQL à la création de la base de données
 
@@ -69,4 +69,12 @@ cd Pho3nix
 
 ```bash
 php -S localhost:8000 -t public
+```
+
+## Pour lancer le serveur sur phpetu.univ-lyon2.fr
+
+Le chemin qu'il faut taper est le suivant une fois connecté au serveur : 
+
+```
+https://phpetu.univ-lyon2.fr/~identifiantLyon2/php_task-main/Pho3nix/public/index.php
 ```
