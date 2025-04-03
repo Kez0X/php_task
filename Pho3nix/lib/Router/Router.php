@@ -1,6 +1,6 @@
 <?php
 
-namespace Pho3nix\lib\Router;
+namespace Router;
 require dirname(__DIR__, 2) . '/config/routes.php';
 
 // Documentation : https://laconsole.dev/formations/framework-php/routage
