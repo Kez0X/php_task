@@ -12,7 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Charger l'autoloader
-require dirname(__DIR__, 1) . '/lib/autoload.php';
+require dirname(__DIR__, 1) . '/Pho3nix/lib/autoload.php';
 
 // Vérifier si la classe Router est bien chargée
 if (!class_exists('Router\Router')) {
