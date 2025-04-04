@@ -2,33 +2,33 @@
 
 const ROUTES = [
     'GET' => [
-        '/' => [
+        '/php_task-main/Pho3nix/' => [
             'controller' => App\Controller\MainController::class,
             'method' => 'home'
         ],
-        '/signup' => [
+        '/php_task-main/Pho3nix/signup' => [
             'controller' => App\Controller\MainController::class,
             'method' => 'signup'
         ],
-        '/logout' => [
+        '/php_task-main/Pho3nix/logout' => [
             'controller' => App\Controller\UserController::class,
             'method' => 'signout'
         ],
-        '/tasks' => [
+        '/php_task-main/Pho3nix/tasks' => [
             'controller' => App\Controller\TaskController::class,
             'method' => 'index'
         ],
     ],
     'POST' => [
-        '/tasks' => [
+        '/php_task-main/Pho3nix/tasks' => [
             'controller' => App\Controller\TaskController::class,
             'method' => 'index'
         ],
-        '/signin' => [
+        '/php_task-main/Pho3nix/signin' => [
             'controller' => App\Controller\UserController::class,
             'method' => 'signin'
         ],
-        '/signup' => [
+        '/php_task-main/Pho3nix/signup' => [
             'controller' => App\Controller\UserController::class,
             'method' => 'signup'
         ]
