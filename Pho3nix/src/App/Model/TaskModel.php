@@ -8,7 +8,7 @@ class TaskModel
 
     public function __construct()
     {
-        $this->db = new \PDO("mysql:host=localhost;dbname=task_manager", "root", "");
+        $this->db = new \PDO("mysql:host=mysql03.univ-lyon2.fr;dbname=php_lbaudrant", "php_lbaudrant", "ADtXK8mIA-9Q6wXO7Joahd60n");
     }
 
     // Récupérer les tâches d'un utilisateur
