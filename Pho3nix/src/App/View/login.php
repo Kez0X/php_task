@@ -8,7 +8,12 @@
 </head>
 <body>
     <h2>Connexion</h2>
-    <form action="/signin" method="POST">
+
+    <?php if (!empty($error)) : ?>
+        <p style="color: red;"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
+    <form action="index.php?page=signin" method="POST">
         <label>Email :</label>
         <input type="email" name="email" required>
         <br>
@@ -17,6 +22,9 @@
         <br>
         <button type="submit">Se connecter</button>
     </form>
-    <button onclick="window.location.href='/signup'">S'inscrire</button>
+
+    <br>
+
+    <button onclick="window.location.href='index.php?page=signup'">S'inscrire</button>
 </body>
 </html>

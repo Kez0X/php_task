@@ -8,8 +8,19 @@ class UserModel
 
     public function __construct()
     {
-        $this->db = new \PDO("mysql:host=mysql03.univ-lyon2.fr;dbname=php_lbaudrant", "php_lbaudrant", "ADtXK8mIA-9Q6wXO7Joahd60n");
-        $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        try {
+            $this->db = new \PDO(
+                "mysql:host=mysql03.univ-lyon2.fr;dbname=php_lbaudrant",
+                "php_lbaudrant",
+                "ADtXK8mIA-9Q6wXO7Joahd60n",
+                [
+                    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+                ]
+            );
+        } catch (\PDOException $e) {
+            die("Erreur de connexion à la base de données : " . $e->getMessage());
+        }
     }
 
     // Récupérer un utilisateur par son email
@@ -17,7 +28,7 @@ class UserModel
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);
-        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $user = $stmt->fetch();
 
         return $user ?: null;
     }
@@ -25,10 +36,8 @@ class UserModel
     // Créer un nouvel utilisateur
     public function createUser(string $email, string $password): bool
     {
-        // Hacher le mot de passe
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Insertion de l'utilisateur dans la base de données
         $stmt = $this->db->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
         return $stmt->execute([
             'email' => $email,
@@ -36,5 +45,4 @@ class UserModel
         ]);
     }
 }
-
 ?>

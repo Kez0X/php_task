@@ -10,28 +10,42 @@ class MainController
     public function home(): void
     {
         session_start();
-        
-        // Vérifier si l'utilisateur est connecté
+
         if (!isset($_SESSION['user'])) {
-            require dirname(__DIR__) . "/View/login.php"; // Vue de connexion
+            // Si pas connecté, afficher la vue de connexion
+            require dirname(__DIR__) . "/View/login.php";
             return;
         }
 
-        $user = $_SESSION['user']; // Contient les infos de l'utilisateur - c'est une variable de session
+        $user = $_SESSION['user'];
 
-        // Récupérer les tâches de l'utilisateur
+        // Récupérer les tâches via le modèle
         $taskModel = new TaskModel();
         $tasks = $taskModel->getUserTasks($user['id']);
 
-        // Afficher la page d'accueil avec les tâches
+        // Afficher la vue principale
         require dirname(__DIR__) . "/View/home.php";
     }
 
-    public function signup() : void
+    public function signup(): void
     {
-        require dirname(__DIR__) . "/View/signup.php"; // Vue d'inscription
-        return;
+        session_start();
+
+        // Si déjà connecté, on redirige vers la page d'accueil
+        if (isset($_SESSION['user'])) {
+            header("Location: index.php?page=home");
+            exit;
+        }
+
+        // Sinon, afficher le formulaire d'inscription
+        require dirname(__DIR__) . "/View/signup.php";
+    }
+
+    public function logout(): void
+    {
+        session_start();
+        session_destroy();
+        header("Location: index.php?page=home");
+        exit;
     }
 }
-
-?>

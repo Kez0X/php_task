@@ -8,7 +8,19 @@ class TaskModel
 
     public function __construct()
     {
-        $this->db = new \PDO("mysql:host=univ-lyon2.fr;dbname=php_lbaudrant", "php_lbaudrant", "ADtXK8mIA-9Q6wXO7Joahd60n");
+        try {
+            $this->db = new \PDO(
+                "mysql:host=mysql03.univ-lyon2.fr;dbname=php_lbaudrant",
+                "php_lbaudrant",
+                "ADtXK8mIA-9Q6wXO7Joahd60n",
+                [
+                    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+                ]
+            );
+        } catch (\PDOException $e) {
+            die("Erreur de connexion à la base de données : " . $e->getMessage());
+        }
     }
 
     // Récupérer les tâches d'un utilisateur
@@ -16,8 +28,7 @@ class TaskModel
     {
         $stmt = $this->db->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $userId]);
-
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll();
     }
 
     // Ajouter une tâche
@@ -48,5 +59,3 @@ class TaskModel
         return $stmt->execute(['id' => $taskId]);
     }
 }
-
-?>

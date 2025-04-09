@@ -16,44 +16,58 @@ class TaskController
     // Afficher les tâches de l'utilisateur
     public function index(): void
     {
-
         if (!isset($_SESSION['user'])) {
-            // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
-            header("Location: /");
+            header("Location: index.php?page=signin");
             exit;
         }
 
-        $userId = $_SESSION['user']['id'];  // On suppose que l'utilisateur est connecté
+        $userId = $_SESSION['user']['id'];
         $tasks = $this->taskModel->getUserTasks($userId);
-        $user = $_SESSION['user'];  // Récupérer l'utilisateur de la session
+        $user = $_SESSION['user'];
 
-        // Si on a une tâche à ajouter
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
-            $this->taskModel->addTask($userId, $_POST['title']);
-            header("Location: /tasks");  // Redirection pour recharger la page
-            exit;
+        require dirname(__DIR__) . '/View/home.php';
+    }
+
+    // Ajouter une tâche
+    public function new(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user'], $_POST['title'])) {
+            $userId = $_SESSION['user']['id'];
+            $title = trim($_POST['title']);
+            if ($title !== '') {
+                $this->taskModel->addTask($userId, $title);
+            }
         }
 
-        // Si on veut supprimer une tâche
-        if (isset($_POST['delete_task_id'])) {
-            $this->taskModel->deleteTask($_POST['delete_task_id']);
-            header("Location: /tasks");  // Redirection pour recharger la page
-            exit;
+        header("Location: index.php?page=tasks");
+        exit;
+    }
+
+    // Supprimer une tâche
+    public function delete(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_task_id'])) {
+            $taskId = (int) $_POST['delete_task_id'];
+            $this->taskModel->deleteTask($taskId);
         }
 
-        // Si on veut modifier une tâche
-        if (isset($_POST['edit_task_id'])) {
-            $this->taskModel->updateTask(
-                $_POST['edit_task_id'],
-                $_POST['edit_title'],
-                isset($_POST['edit_completed']) ? true : false
-            );
-            header("Location: /tasks");  // Redirection pour recharger la page
-            exit;
+        header("Location: index.php?page=tasks");
+        exit;
+    }
+
+    // Modifier une tâche
+    public function edit(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_task_id'], $_POST['edit_title'])) {
+            $taskId = (int) $_POST['edit_task_id'];
+            $title = trim($_POST['edit_title']);
+            $completed = isset($_POST['edit_completed']);
+
+            $this->taskModel->updateTask($taskId, $title, $completed);
         }
 
-        // On affiche la vue des tâches avec l'interface pour ajouter/supprimer/éditer
-        require dirname(__DIR__) . '/View/home.php';  // On utilise une seule vue pour gérer toutes les tâches
+        header("Location: index.php?page=tasks");
+        exit;
     }
 }
 
