@@ -6,6 +6,8 @@ require_once '../src/App/Controller/MainController.php';
 require_once '../src/App/Controller/UserController.php';
 require_once '../src/App/Controller/TaskController.php';
 
+require_once dirname(__DIR__, levels : 1) . '/vendor/autoload.php';
+
 use App\Controller\MainController;
 use App\Controller\UserController;
 use App\Controller\TaskController;

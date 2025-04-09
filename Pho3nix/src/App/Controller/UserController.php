@@ -47,7 +47,7 @@ class UserController
             }
         }
 
-        require __DIR__ . '/../View/register.php';
+        require __DIR__ . '/../View/signup.php';
     }
 
     public function signout(): void
