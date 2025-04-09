@@ -7,7 +7,7 @@ $user = $_SESSION['user'] ?? null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../assets/style.css">
+    <link rel="stylesheet" href="../../assets/style.css">
     <title>Gestion des tâches</title>
 </head>
 <body>

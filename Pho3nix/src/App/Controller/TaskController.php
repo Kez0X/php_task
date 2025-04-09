@@ -39,7 +39,7 @@ class TaskController
             }
         }
 
-        header("Location: index.php?page=tasks");
+        header("Location: index.php?page=home");
         exit;
     }
 
@@ -51,7 +51,7 @@ class TaskController
             $this->taskModel->deleteTask($taskId);
         }
 
-        header("Location: index.php?page=tasks");
+        header("Location: index.php?page=home");
         exit;
     }
 
@@ -66,7 +66,7 @@ class TaskController
             $this->taskModel->updateTask($taskId, $title, $completed);
         }
 
-        header("Location: index.php?page=tasks");
+        header("Location: index.php?page=home");
         exit;
     }
 }
